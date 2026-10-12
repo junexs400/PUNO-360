@@ -1,0 +1,987 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#073b5c">
+  <meta name="description" content="PUNO 360° conecta viajeros con experiencias turísticas, cultura, gastronomía y emprendimientos locales de Puno, Perú.">
+  <title>PUNO 360° | Descubre Puno, vive la experiencia</title>
+
+  <style>
+    :root {
+      --azul: #073b5c;
+      --azul-claro: #0e7490;
+      --turquesa: #18a6a6;
+      --dorado: #f2b84b;
+      --fondo: #f5f8fa;
+      --texto: #203344;
+      --blanco: #ffffff;
+      --radio: 18px;
+      --sombra: 0 10px 30px rgba(7, 59, 92, .09);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; scroll-padding-top: 85px; }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--texto);
+      background: var(--fondo);
+      line-height: 1.65;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    button, input, select, textarea { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+
+    .contenedor { width: min(1160px, 91%); margin: auto; }
+
+    .barra {
+      background: rgba(255,255,255,.97);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid #e6edf2;
+      backdrop-filter: blur(12px);
+    }
+
+    .navegacion {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .marca {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      color: var(--azul);
+      font-size: 1.35rem;
+      font-weight: 900;
+      letter-spacing: -.7px;
+    }
+
+    .logo {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(145deg, var(--azul), var(--turquesa));
+      color: white;
+      font-size: 1.05rem;
+      border: 3px solid #d9f1f1;
+    }
+
+    .marca small {
+      display: block;
+      font-size: .67rem;
+      color: #597181;
+      letter-spacing: .3px;
+      font-weight: 600;
+    }
+
+    .menu { display: flex; align-items: center; gap: 23px; }
+
+    .menu a {
+      font-size: .92rem;
+      font-weight: 700;
+      transition: color .2s;
+    }
+
+    .menu a:hover { color: var(--turquesa); }
+
+    .boton {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border: 0;
+      border-radius: 999px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform .2s, background .2s;
+    }
+
+    .boton:hover { transform: translateY(-2px); }
+
+    .primario { background: var(--dorado); color: #17344a; }
+    .secundario { background: var(--azul); color: white; }
+    .contorno { border: 1px solid #d4e3eb; color: var(--azul); background: white; }
+
+    .portada {
+      min-height: 590px;
+      display: flex;
+      align-items: center;
+      color: white;
+      background:
+        linear-gradient(90deg, rgba(3,35,57,.88), rgba(3,35,57,.46) 58%, rgba(3,35,57,.15)),
+        url("https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=2000&q=85")
+        center 52% / cover;
+    }
+
+    .portada-contenido { max-width: 730px; padding: 80px 0; }
+
+    .etiqueta {
+      display: inline-block;
+      border: 1px solid rgba(255,255,255,.5);
+      border-radius: 999px;
+      padding: 7px 14px;
+      font-size: .83rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      background: rgba(255,255,255,.08);
+    }
+
+    h1 {
+      font-size: clamp(2.6rem, 6vw, 4.8rem);
+      line-height: 1.08;
+      letter-spacing: -2px;
+      margin-bottom: 23px;
+    }
+
+    h1 span { color: var(--dorado); }
+
+    .portada p { max-width: 620px; font-size: 1.12rem; margin-bottom: 29px; }
+    .acciones { display: flex; flex-wrap: wrap; gap: 12px; }
+
+    .dato-rapido {
+      background: white;
+      box-shadow: var(--sombra);
+      border-radius: var(--radio);
+      padding: 25px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: -38px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .dato { display: flex; align-items: center; gap: 13px; padding: 5px; }
+    .dato-icono { font-size: 1.8rem; }
+    .dato strong { display: block; color: var(--azul); }
+    .dato small { color: #6a7b88; }
+
+    section { padding: 85px 0; }
+
+    .encabezado { text-align: center; max-width: 720px; margin: 0 auto 38px; }
+    .sobretitulo {
+      color: var(--azul-claro);
+      font-size: .82rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    h2 {
+      color: var(--azul);
+      font-size: clamp(2rem, 4vw, 2.9rem);
+      line-height: 1.2;
+      margin: 10px 0 15px;
+      letter-spacing: -.8px;
+    }
+
+    .encabezado p { color: #607482; }
+
+    .buscador {
+      display: flex;
+      gap: 12px;
+      max-width: 760px;
+      margin: 0 auto 28px;
+    }
+
+    .campo {
+      width: 100%;
+      padding: 13px 15px;
+      border: 1px solid #d7e2e9;
+      border-radius: 11px;
+      background: white;
+      color: var(--texto);
+      outline: none;
+    }
+
+    .campo:focus { border-color: var(--turquesa); box-shadow: 0 0 0 3px #18a6a620; }
+
+    .categorias {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-bottom: 32px;
+    }
+
+    .filtro {
+      border: 1px solid #d8e4eb;
+      border-radius: 999px;
+      padding: 9px 15px;
+      color: var(--azul);
+      background: white;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .filtro.activo, .filtro:hover { background: var(--azul); color: white; }
+
+    .catalogo {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .tarjeta {
+      background: white;
+      border-radius: var(--radio);
+      overflow: hidden;
+      box-shadow: var(--sombra);
+      transition: transform .25s;
+    }
+
+    .tarjeta:hover { transform: translateY(-5px); }
+
+    .foto {
+      height: 220px;
+      width: 100%;
+      object-fit: cover;
+      background: #dce8ee;
+    }
+
+    .tarjeta-contenido { padding: 22px; }
+
+    .categoria {
+      display: inline-block;
+      color: #087b81;
+      background: #e3f7f4;
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: .76rem;
+      font-weight: 800;
+      margin-bottom: 11px;
+    }
+
+    .tarjeta h3 { color: var(--azul); font-size: 1.2rem; margin-bottom: 8px; }
+    .tarjeta p { color: #647785; font-size: .93rem; margin-bottom: 18px; }
+    .tarjeta-pie { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+    .referencial { font-size: .78rem; color: #738391; }
+
+    .enlace {
+      color: var(--azul-claro);
+      font-weight: 800;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .vacio { grid-column: 1/-1; text-align: center; padding: 35px; color: #607482; }
+
+    .franja {
+      background: var(--azul);
+      color: white;
+      padding: 48px 0;
+    }
+
+    .franja-interior {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .franja h2 { color: white; font-size: 2rem; margin: 0 0 8px; }
+    .franja p { color: #d5e6ef; }
+
+    .nosotros-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .nosotros-imagen {
+      width: 100%;
+      height: 430px;
+      object-fit: cover;
+      border-radius: 24px;
+      box-shadow: var(--sombra);
+    }
+
+    .nosotros-texto > p { color: #617582; margin: 15px 0; }
+
+    .valor {
+      display: flex;
+      gap: 13px;
+      margin-top: 20px;
+    }
+
+    .valor-icono {
+      flex-shrink: 0;
+      width: 43px;
+      height: 43px;
+      display: grid;
+      place-items: center;
+      background: #e2f5f3;
+      border-radius: 13px;
+      font-size: 1.25rem;
+    }
+
+    .valor strong { display: block; color: var(--azul); }
+    .valor p { font-size: .91rem; color: #687c89; }
+
+    .principios { background: #eaf3f6; }
+
+    .principios-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .principio {
+      background: white;
+      border-radius: var(--radio);
+      padding: 28px;
+      border: 1px solid #e4edf1;
+    }
+
+    .principio .emoji { font-size: 2rem; }
+    .principio h3 { color: var(--azul); margin: 12px 0 8px; }
+    .principio p { color: #657987; font-size: .94rem; }
+
+    .formulario-seccion {
+      background: linear-gradient(135deg, #e8f6f5, #f4f7fb);
+    }
+
+    .formulario-grid {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .formulario-intro p { color: #617582; margin: 15px 0; }
+
+    .nota {
+      padding: 15px;
+      background: #fff8e7;
+      border-left: 4px solid var(--dorado);
+      border-radius: 8px;
+      font-size: .9rem;
+      color: #5c523d;
+    }
+
+    form {
+      background: white;
+      border-radius: var(--radio);
+      padding: 30px;
+      box-shadow: var(--sombra);
+    }
+
+    .grupo { margin-bottom: 17px; }
+    .grupo label { display: block; font-weight: 800; font-size: .9rem; margin-bottom: 6px; color: var(--azul); }
+
+    textarea.campo { min-height: 110px; resize: vertical; }
+    .ancho-completo { width: 100%; }
+
+    .contacto-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .contacto-card {
+      background: white;
+      border: 1px solid #e1eaf0;
+      border-radius: var(--radio);
+      padding: 25px;
+      text-align: center;
+    }
+
+    .contacto-card .emoji { font-size: 2rem; }
+    .contacto-card h3 { color: var(--azul); margin: 10px 0 5px; }
+    .contacto-card p { color: #6a7e8a; font-size: .91rem; margin-bottom: 12px; }
+
+    footer { background: #052b43; color: white; padding: 42px 0 20px; }
+    .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 30px; }
+    footer h3, footer h4 { margin-bottom: 12px; }
+    footer p, footer a { color: #d0e0e8; font-size: .91rem; }
+    footer a:hover { color: var(--dorado); }
+    .footer-links { display: grid; gap: 7px; }
+    .pie-final { border-top: 1px solid #ffffff26; margin-top: 28px; padding-top: 17px; font-size: .8rem; color: #b9d0dc; }
+
+    .whatsapp-flotante {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 15;
+      background: #168b58;
+      color: white;
+      border-radius: 999px;
+      padding: 13px 19px;
+      box-shadow: 0 7px 22px #0003;
+      font-weight: 900;
+    }
+
+    .aviso {
+      margin-top: 18px;
+      padding: 12px 15px;
+      border-radius: 10px;
+      background: #f0f7fa;
+      color: #506878;
+      font-size: .83rem;
+    }
+
+    @media (max-width: 900px) {
+      .menu { gap: 12px; }
+      .menu a { font-size: .82rem; }
+      .catalogo { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .nosotros-grid, .formulario-grid { grid-template-columns: 1fr; }
+      .nosotros-imagen { height: 340px; }
+    }
+
+    @media (max-width: 650px) {
+      .navegacion { padding: 12px 0; flex-wrap: wrap; }
+      .menu { width: 100%; overflow-x: auto; padding-bottom: 5px; }
+      .menu a { white-space: nowrap; }
+      .portada { min-height: 540px; }
+      .portada-contenido { padding: 65px 0; }
+      .dato-rapido { grid-template-columns: 1fr; margin-top: 18px; }
+      section { padding: 62px 0; }
+      .catalogo, .principios-grid, .contacto-grid, .footer-grid { grid-template-columns: 1fr; }
+      .buscador { flex-direction: column; }
+      .franja-interior { flex-direction: column; align-items: flex-start; }
+      form { padding: 22px; }
+      .foto { height: 230px; }
+      .whatsapp-flotante { right: 12px; bottom: 12px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="barra">
+    <div class="contenedor navegacion">
+      <a class="marca" href="#inicio" aria-label="PUNO 360°, página de inicio">
+        <span class="logo">360°</span>
+        <span>PUNO 360°<small>Conectamos Puno con el mundo</small></span>
+      </a>
+
+      <nav class="menu" aria-label="Navegación principal">
+        <a href="#inicio">Inicio</a>
+        <a href="#experiencias">Experiencias</a>
+        <a href="#nosotros">Nosotros</a>
+        <a href="#disena">Diseña tu viaje</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="portada" id="inicio">
+      <div class="contenedor">
+        <div class="portada-contenido">
+          <span class="etiqueta">🌎 Turismo · Cultura · Experiencias locales</span>
+          <h1>Descubre Puno.<br><span>Vive la experiencia.</span></h1>
+          <p>
+            Explora la riqueza del lago Titicaca, descubre la cultura puneña
+            y encuentra experiencias que se adapten a tu tiempo, presupuesto
+            e intereses.
+          </p>
+          <div class="acciones">
+            <a class="boton primario" href="#experiencias">Explorar experiencias ↗</a>
+            <a class="boton contorno" href="#disena">Diseñar mi viaje</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="contenedor">
+      <div class="dato-rapido">
+        <div class="dato">
+          <span class="dato-icono">🏔️</span>
+          <div><strong>Naturaleza y cultura</strong><small>Descubre la diversidad de Puno</small></div>
+        </div>
+        <div class="dato">
+          <span class="dato-icono">🧭</span>
+          <div><strong>Experiencias a tu medida</strong><small>Según tus intereses y presupuesto</small></div>
+        </div>
+        <div class="dato">
+          <span class="dato-icono">🤝</span>
+          <div><strong>Emprendimientos locales</strong><small>Conectamos visitantes y proveedores</small></div>
+        </div>
+      </div>
+    </div>
+
+    <section id="experiencias">
+      <div class="contenedor">
+        <div class="encabezado">
+          <span class="sobretitulo">Explora a tu manera</span>
+          <h2>Encuentra tu próxima experiencia</h2>
+          <p>
+            Conoce las categorías de servicios que PUNO 360° busca integrar
+            en una sola plataforma digital.
+          </p>
+        </div>
+
+        <div class="buscador">
+          <input class="campo" id="buscar" type="search"
+                 placeholder="¿Qué te gustaría descubrir?" aria-label="Buscar experiencias">
+          <a class="boton secundario" href="#disena">Personalizar viaje</a>
+        </div>
+
+        <div class="categorias" aria-label="Filtrar categorías">
+          <button class="filtro activo" data-filtro="todos">Todos</button>
+          <button class="filtro" data-filtro="tours">Tours y lago</button>
+          <button class="filtro" data-filtro="alojamiento">Alojamiento</button>
+          <button class="filtro" data-filtro="gastronomia">Gastronomía</button>
+          <button class="filtro" data-filtro="transporte">Transporte</button>
+          <button class="filtro" data-filtro="artesania">Artesanía</button>
+          <button class="filtro" data-filtro="comunitario">Turismo comunitario</button>
+        </div>
+
+        <div class="catalogo" id="catalogo">
+          <article class="tarjeta" data-categoria="tours"
+                   data-busqueda="lago titicaca islas uros taquile tours excursiones">
+            <img class="foto"
+                 src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=900&q=80"
+                 alt="Paisaje natural de montañas" loading="lazy">
+            <div class="tarjeta-contenido">
+              <span class="categoria">🚤 Tours y experiencias</span>
+              <h3>Aventuras en el Titicaca</h3>
+              <p>Explora opciones de recorridos por el lago, visitas culturales y excursiones guiadas.</p>
+              <div class="tarjeta-pie">
+                <span class="referencial">Servicio por consultar</span>
+                <button class="enlace elegir" data-servicio="Tours y experiencias">Consultar ↗</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="tarjeta" data-categoria="alojamiento"
+                   data-busqueda="hotel hostal hospedaje rural alojamiento habitación">
+            <img class="foto"
+                 src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=80"
+                 alt="Alojamiento turístico" loading="lazy">
+            <div class="tarjeta-contenido">
+              <span class="categoria">🛏️ Alojamiento</span>
+              <h3>Descanso con identidad local</h3>
+              <p>Una categoría para encontrar hoteles, hospedajes y alojamientos rurales de la región.</p>
+              <div class="tarjeta-pie">
+                <span class="referencial">Tarifas por confirmar</span>
+                <button class="enlace elegir" data-servicio="Alojamiento">Consultar ↗</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="tarjeta" data-categoria="gastronomia"
+                   data-busqueda="gastronomía comida típica restaurantes trucha platos puneños">
+            <img class="foto"
+                 src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=80"
+                 alt="Presentación de alimentos" loading="lazy">
+            <div class="tarjeta-contenido">
+              <span class="categoria">🍽️ Gastronomía</span>
+              <h3>Sabores de Puno</h3>
+              <p>Descubre la cocina regional, los restaurantes y las experiencias culinarias locales.</p>
+              <div class="tarjeta-pie">
+                <span class="referencial">Precios por confirmar</span>
+                <button class="enlace elegir" data-servicio="Gastronomía">Consultar ↗</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="tarjeta" data-categoria="transporte"
+                   data-busqueda="transporte movilidad traslado vehículo lancha viaje">
+            <img class="foto"
+                 src="https://images.unsplash.com/photo-1464219789935-c2d9d9aba644?auto=format&fit=crop&w=900&q=80"
+                 alt="Vehículo para viajar" loading="lazy">
+            <div class="tarjeta-contenido">
+              <span class="categoria">🚐 Transporte</span>
+              <h3>Muévete por la región</h3>
+              <p>Una categoría para coordinar traslados turísticos terrestres y lacustres, según disponibilidad.</p>
+              <div class="tarjeta-pie">
+                <span class="referencial">Servicio por consultar</span>
+                <button class="enlace elegir" data-servicio="Transporte">Consultar ↗</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="tarjeta" data-categoria="artesania"
+                   data-busqueda="artesanía textiles tejidos recuerdos productos locales">
+            <img class="foto"
+                 src="https://images.unsplash.com/photo-1452860606245-08befc0ff44b?auto=format&fit=crop&w=900&q=80"
+                 alt="Objetos artesanales" loading="lazy">
+            <div class="tarjeta-contenido">
+              <span class="categoria">🧶 Artesanía</span>
+              <h3>Creaciones con historia</h3>
+              <p>Conoce textiles, artesanías y productos elaborados por emprendedores de la región.</p>
+              <div class="tarjeta-pie">
+                <span class="referencial">Productos por confirmar</span>
+                <button class="enlace elegir" data-servicio="Artesanía">Consultar ↗</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="tarjeta" data-categoria="comunitario"
+                   data-busqueda="comunidad turismo vivencial cultura tradición costumbres">
+            <img class="foto"
+                 src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=900&q=80"
+                 alt="Paisaje natural para descubrir comunidades" loading="lazy">
+            <div class="tarjeta-contenido">
+              <span class="categoria">🫶 Turismo comunitario</span>
+              <h3>Vive la cultura local</h3>
+              <p>Explora propuestas de intercambio cultural y turismo comunitario, con participación autorizada.</p>
+              <div class="tarjeta-pie">
+                <span class="referencial">Experiencias por confirmar</span>
+                <button class="enlace elegir" data-servicio="Turismo comunitario">Consultar ↗</button>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <p class="aviso">
+          <strong>Importante:</strong> este catálogo es una maqueta académica.
+          Las fotografías son ilustrativas. Los proveedores, precios, disponibilidad
+          y condiciones deben confirmarse antes de ofrecer servicios o aceptar reservas.
+        </p>
+      </div>
+    </section>
+
+    <div class="franja">
+      <div class="contenedor franja-interior">
+        <div>
+          <h2>No vendemos lugares, diseñamos experiencias.</h2>
+          <p>Una propuesta digital para conectar viajeros con la riqueza de Puno.</p>
+        </div>
+        <a class="boton primario" href="#disena">Crear mi experiencia ↗</a>
+      </div>
+    </div>
+
+    <section id="nosotros">
+      <div class="contenedor nosotros-grid">
+        <img class="nosotros-imagen"
+             src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1100&q=85"
+             alt="Paisaje de naturaleza y aventura" loading="lazy">
+
+        <div class="nosotros-texto">
+          <span class="sobretitulo">Conoce nuestra propuesta</span>
+          <h2>Un Puno lleno de experiencias por descubrir</h2>
+          <p>
+            PUNO 360° es una propuesta de emprendimiento tecnológico aplicado
+            al turismo. Busca integrar alojamiento, tours, gastronomía, transporte,
+            artesanía y experiencias culturales o comunitarias en una plataforma digital.
+          </p>
+          <p>
+            Queremos facilitar la organización de los viajes y generar oportunidades
+            de visibilidad comercial para las micro, pequeñas y medianas empresas turísticas.
+          </p>
+
+          <div class="valor">
+            <span class="valor-icono">🎯</span>
+            <div>
+              <strong>Nuestra misión</strong>
+              <p>Conectar a turistas con la diversidad turística de Puno mediante una plataforma digital que integre servicios, emprendimientos y experiencias locales, facilitando viajes personalizados y generando nuevas oportunidades para las MIPYMES turísticas.</p>
+            </div>
+          </div>
+
+          <div class="valor">
+            <span class="valor-icono">🌎</span>
+            <div>
+              <strong>Nuestra visión</strong>
+              <p>Ser la principal plataforma digital de experiencias turísticas de Puno y un referente nacional en innovación turística, reconocida por conectar al visitante con experiencias auténticas y contribuir al crecimiento sostenible y competitivo de los emprendimientos locales.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="principios">
+      <div class="contenedor">
+        <div class="encabezado">
+          <span class="sobretitulo">Nuestra identidad</span>
+          <h2>Lo que nos mueve</h2>
+          <p>Los principios que orientan la propuesta de PUNO 360°.</p>
+        </div>
+
+        <div class="principios-grid">
+          <article class="principio">
+            <span class="emoji">🏔️</span>
+            <h3>Autenticidad</h3>
+            <p>Dar protagonismo a las experiencias que reflejan la identidad cultural y territorial de Puno.</p>
+          </article>
+          <article class="principio">
+            <span class="emoji">🤝</span>
+            <h3>Colaboración</h3>
+            <p>Conectar negocios, comunidades y prestadores locales para ampliar sus oportunidades.</p>
+          </article>
+          <article class="principio">
+            <span class="emoji">💡</span>
+            <h3>Innovación práctica</h3>
+            <p>Usar herramientas digitales para facilitar la búsqueda, organización y coordinación de viajes.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="formulario-seccion" id="disena">
+      <div class="contenedor formulario-grid">
+        <div class="formulario-intro">
+          <span class="sobretitulo">Tu viaje comienza aquí</span>
+          <h2>Diseña una experiencia a tu medida</h2>
+          <p>
+            Cuéntanos qué te interesa, cuánto tiempo tienes y cuál es tu
+            presupuesto aproximado. Prepararemos una consulta que podrás enviar
+            por WhatsApp para coordinar los siguientes pasos.
+          </p>
+          <div class="nota">
+            <strong>Prototipo académico:</strong> este formulario prepara un mensaje
+            de consulta. No confirma reservas, pagos ni disponibilidad automática.
+          </div>
+        </div>
+
+        <form id="form-viaje">
+          <div class="grupo">
+            <label for="nombre">Tu nombre</label>
+            <input class="campo" id="nombre" name="nombre" required maxlength="80"
+                   autocomplete="name" placeholder="¿Cómo te llamas?">
+          </div>
+
+          <div class="grupo">
+            <label for="origen">¿Desde dónde nos visitas?</label>
+            <select class="campo" id="origen" name="origen" required>
+              <option value="">Selecciona una opción</option>
+              <option>Perú</option>
+              <option>Chile</option>
+              <option>Bolivia</option>
+              <option>Otro país</option>
+              <option>Vivo en Puno</option>
+            </select>
+          </div>
+
+          <div class="grupo">
+            <label for="interes">¿Qué experiencia buscas?</label>
+            <select class="campo" id="interes" name="interes" required>
+              <option value="">Selecciona una categoría</option>
+              <option>Tours y experiencias</option>
+              <option>Alojamiento</option>
+              <option>Gastronomía</option>
+              <option>Transporte</option>
+              <option>Artesanía</option>
+              <option>Turismo comunitario</option>
+              <option>Una combinación de varias experiencias</option>
+            </select>
+          </div>
+
+          <div class="grupo">
+            <label for="duracion">¿Cuánto tiempo tienes?</label>
+            <select class="campo" id="duracion" name="duracion" required>
+              <option value="">Selecciona la duración</option>
+              <option>Medio día</option>
+              <option>1 día</option>
+              <option>2 a 3 días</option>
+              <option>4 días o más</option>
+            </select>
+          </div>
+
+          <div class="grupo">
+            <label for="presupuesto">Presupuesto aproximado por persona (S/)</label>
+            <select class="campo" id="presupuesto" name="presupuesto" required>
+              <option value="">Selecciona tu presupuesto</option>
+              <option>Menos de S/ 100</option>
+              <option>S/ 100 a S/ 300</option>
+              <option>S/ 301 a S/ 600</option>
+              <option>Más de S/ 600</option>
+              <option>Necesito orientación</option>
+            </select>
+          </div>
+
+          <div class="grupo">
+            <label for="detalles">¿Algún detalle adicional? (opcional)</label>
+            <textarea class="campo" id="detalles" name="detalles" maxlength="500"
+                      placeholder="Fechas aproximadas, número de personas, intereses..."></textarea>
+          </div>
+
+          <button type="submit" class="boton secundario ancho-completo">
+            Enviar consulta por WhatsApp ↗
+          </button>
+          <p class="aviso">
+            Al continuar, se abrirá WhatsApp con el mensaje preparado para que
+            puedas revisarlo y enviarlo voluntariamente.
+          </p>
+        </form>
+      </div>
+    </section>
+
+    <section id="contacto">
+      <div class="contenedor">
+        <div class="encabezado">
+          <span class="sobretitulo">Conectemos</span>
+          <h2>Hablemos de tu próxima experiencia</h2>
+          <p>Consulta sobre la propuesta, las categorías turísticas o posibles colaboraciones.</p>
+        </div>
+
+        <div class="contacto-grid">
+          <article class="contacto-card">
+            <span class="emoji">💬</span>
+            <h3>WhatsApp</h3>
+            <p>Canal de contacto de PUNO 360°.</p>
+            <a class="boton secundario"
+               href="https://wa.me/51992172337?text=Hola%2C%20quisiera%20informaci%C3%B3n%20sobre%20PUNO%20360%C2%B0"
+               target="_blank" rel="noopener noreferrer">Escribir mensaje</a>
+          </article>
+
+          <article class="contacto-card">
+            <span class="emoji">🏨</span>
+            <h3>Proveedores turísticos</h3>
+            <p>¿Tienes un negocio o una experiencia local que te gustaría dar a conocer?</p>
+            <a class="enlace" href="#disena">Contactar ↗</a>
+          </article>
+
+          <article class="contacto-card">
+            <span class="emoji">📍</span>
+            <h3>Nuestro origen</h3>
+            <p>Puno, Perú. Una propuesta digital con enfoque local y visión de crecimiento.</p>
+            <a class="enlace" href="#nosotros">Conocer el proyecto ↗</a>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="contenedor">
+      <div class="footer-grid">
+        <div>
+          <h3>PUNO 360° 🌎</h3>
+          <p>No vendemos lugares, diseñamos experiencias.</p>
+          <p>Conectamos Puno con el mundo a través de una propuesta digital de turismo.</p>
+        </div>
+        <div>
+          <h4>Explora</h4>
+          <div class="footer-links">
+            <a href="#experiencias">Catálogo de experiencias</a>
+            <a href="#nosotros">Nosotros</a>
+            <a href="#disena">Diseña tu viaje</a>
+          </div>
+        </div>
+        <div>
+          <h4>Contacto</h4>
+          <div class="footer-links">
+            <a href="https://wa.me/51992172337" target="_blank" rel="noopener noreferrer">WhatsApp: 992 172 337</a>
+            <a href="#contacto">Consultas y colaboraciones</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pie-final">
+        © <span id="anio"></span> PUNO 360° · Proyecto académico de Informática Empresarial.
+        Sitio demostrativo: los servicios, tarifas y reservas deben confirmarse con sus proveedores.
+      </div>
+    </div>
+  </footer>
+
+  <a class="whatsapp-flotante"
+     href="https://wa.me/51992172337?text=Hola%2C%20quisiera%20conocer%20PUNO%20360%C2%B0"
+     target="_blank" rel="noopener noreferrer" aria-label="Contactar a PUNO 360° por WhatsApp">
+    ☎ WhatsApp
+  </a>
+
+  <script>
+    // Año automático en el pie de página
+    document.getElementById("anio").textContent = new Date().getFullYear();
+
+    // Buscador y filtros del catálogo
+    const campoBusqueda = document.getElementById("buscar");
+    const tarjetas = [...document.querySelectorAll(".tarjeta")];
+    const botonesFiltro = [...document.querySelectorAll(".filtro")];
+    let categoriaActual = "todos";
+
+    function filtrarCatalogo() {
+      const texto = campoBusqueda.value.trim().toLocaleLowerCase("es");
+
+      tarjetas.forEach(tarjeta => {
+        const categoria = tarjeta.dataset.categoria;
+        const busqueda = (
+          tarjeta.dataset.busqueda + " " + tarjeta.innerText
+        ).toLocaleLowerCase("es");
+
+        const coincideCategoria =
+          categoriaActual === "todos" || categoria === categoriaActual;
+        const coincideTexto = busqueda.includes(texto);
+
+        tarjeta.hidden = !(coincideCategoria && coincideTexto);
+      });
+
+      const hayResultados = tarjetas.some(tarjeta => !tarjeta.hidden);
+      let mensaje = document.getElementById("sin-resultados");
+
+      if (!hayResultados) {
+        if (!mensaje) {
+          mensaje = document.createElement("p");
+          mensaje.id = "sin-resultados";
+          mensaje.className = "vacio";
+          mensaje.textContent = "No encontramos coincidencias. Prueba con otra búsqueda.";
+          document.getElementById("catalogo").appendChild(mensaje);
+        }
+      } else if (mensaje) {
+        mensaje.remove();
+      }
+    }
+
+    campoBusqueda.addEventListener("input", filtrarCatalogo);
+
+    botonesFiltro.forEach(boton => {
+      boton.addEventListener("click", () => {
+        categoriaActual = boton.dataset.filtro;
+        botonesFiltro.forEach(item => item.classList.remove("activo"));
+        boton.classList.add("activo");
+        filtrarCatalogo();
+      });
+    });
+
+    // Elegir una categoría desde una tarjeta y abrir el formulario
+    document.querySelectorAll(".elegir").forEach(boton => {
+      boton.addEventListener("click", () => {
+        document.getElementById("interes").value = boton.dataset.servicio;
+        document.getElementById("disena").scrollIntoView({ behavior: "smooth" });
+        document.getElementById("nombre").focus({ preventScroll: true });
+      });
+    });
+
+    // Preparar una consulta por WhatsApp. No procesa pagos ni confirma reservas.
+    document.getElementById("form-viaje").addEventListener("submit", evento => {
+      evento.preventDefault();
+
+      const datos = new FormData(evento.currentTarget);
+      const nombre = datos.get("nombre").trim();
+      const origen = datos.get("origen");
+      const interes = datos.get("interes");
+      const duracion = datos.get("duracion");
+      const presupuesto = datos.get("presupuesto");
+      const detalles = (datos.get("detalles") || "").trim();
+
+      const mensaje = [
+        "Hola, PUNO 360°. Quisiera consultar por una experiencia turística.",
+        "",
+        "Nombre: " + nombre,
+        "Origen: " + origen,
+        "Interés: " + interes,
+        "Duración: " + duracion,
+        "Presupuesto por persona: " + presupuesto,
+        detalles ? "Detalles: " + detalles : "",
+        "",
+        "Entiendo que la disponibilidad y las tarifas deben confirmarse."
+      ].filter(Boolean).join("\n");
+
+      const url = "https://wa.me/51992172337?text=" + encodeURIComponent(mensaje);
+      window.open(url, "_blank", "noopener,noreferrer");
+    });
+  </script>
+</body>
+</html>
